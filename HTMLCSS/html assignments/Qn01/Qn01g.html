@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qn01(g)</title>
+    <style>
+
+        .page-wrapper {
+            display: grid;
+            grid-template-rows: auto auto 1fr auto;
+            min-height: 100vh;
+            margin: 3px;
+            text-align: center;
+            background-color: antiquewhite;
+        }
+        .header{
+            height: 70px;
+            width: 100%;
+            border: 4px dashed brown;
+            background-color: rgb(100, 140, 141);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .navtop{
+            height: 50px;
+            border: 3px double black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container{
+            display: grid;
+            grid-template-columns: 20% 60% 20%;
+            min-height: 0;
+        }
+        .content{
+            margin: 3px;
+            padding: 1rem;
+            border: 1px dashed brown;
+            background-color: rgb(142, 189, 189);
+        }
+        .sidebar{
+            margin: 3px;
+            border: 3px dashed brown;
+            background-color: bisque;
+        }
+        .footer{
+            height: 50px;
+            width: 100%;
+            padding: 1rem;
+            background-color: rgb(95, 207, 170);
+            border: 2px dashed brown;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="header">
+            <h1>Header</h1>
+        </header>
+        <div class="navtop">
+            <h3>Top Navigation </h3>
+        </div>
+        <div class="container">
+            <div class="sidebar">
+                <h3>Left side navbar</h3>
+            </div>
+            <div class="content">
+                <h2>Main Content</h2>
+            </div>
+            <div class="sidebar">
+                <h3>Right side navbar</h3>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <h3>Footer</h3>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Anna University Grade Sheet Header</title>
+  <style>
+    body {
+      background-color: #dbf0f4;
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 40px;
+    }
+    .grade-sheet-header {
+      width: 800px;
+      height: 90px;
+      border: 2px solid #4ca6c2;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #e7f4fc 80%, #d6eaff 100%);
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      position: relative;
+      box-sizing: border-box;
+      box-shadow: 0 3px 10px rgba(120,150,170,0.08);
+    }
+    .gs-left-logo {
+      width: 95px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 8px;
+    }
+    .gs-left-logo img {
+      width: 65px;
+      height: 65px;
+      object-fit: contain;
+    }
+    .gs-main-content {
+      flex: 1 1 auto;
+      padding: 10px 0 10px 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .gs-main-content h2 {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1d2951;
+      margin: 0 0 5px 0;
+      letter-spacing: 1px;
+    }
+    .gs-main-content .degree-exam {
+      font-size: 15px;
+      font-weight: bold;
+      color: #183f61;
+      margin-bottom: 3px;
+    }
+    .gs-main-content .grade-sheet {
+      font-size: 15px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .gs-row {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      font-size: 15px;
+    }
+    .gs-label {
+      font-weight: bold;
+      color: #394048;
+      letter-spacing: 1px;
+    }
+    .gs-value {
+      font-size: 18px;
+      font-weight: bold;
+      color: #232222;
+      margin-left: 3px;
+    }
+    .gs-folio {
+      min-width: 180px;
+      display: flex;
+      align-items: center;
+    }
+    .gs-folio .gs-label {
+      font-weight: normal;
+      color: #32334f;
+      font-size: 15px;
+      margin-right: 3px;
+    }
+    .gs-folio .gs-value {
+      font-size: 15px;
+      font-weight: bold;
+      color: #232222;
+    }
+    .gs-photo-box {
+      width: 70px;
+      background: #b8d0e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-left: 2px solid #87b7d4;
+    }
+    .gs-photo-placeholder {
+      width: 55px;
+      height: 60px;
+      background: #e5ecef;
+      border: 1px solid #b9b9bc;
+      border-radius: 2px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #7e8ba1;
+    }
+  </style>
+</head>
+<body>
+  <div class="grade-sheet-header">
+    <div class="gs-left-logo">
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/55/Anna_University_Logo.svg/1200px-Anna_University_Logo.svg.png" alt="Anna University Logo" />
+    </div>
+    <div class="gs-main-content">
+      <h2>ANNA UNIVERSITY, CHENNAI - 25</h2>
+      <div class="degree-exam">B.Tech. DEGREE EXAMINATIONS</div>
+      <div class="grade-sheet">GRADE SHEET</div>
+      <div class="gs-row">
+        <span class="gs-label">Sl.No: <span style="color:#2454a2;">MA</span></span>
+        <span class="gs-value">5434090</span>
+        <span class="gs-folio">
+          <span class="gs-label">Folio No.&nbsp;</span>
+          <span class="gs-value">AU1715451</span>
+        </span>
+      </div>
+    </div>
+    <div class="gs-photo-box">
+      <div class="gs-photo-placeholder">
+        Photo
+      </div>
+    </div>
+  </div>
+</body>
+</html>

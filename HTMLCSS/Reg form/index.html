@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registraiton Form</title>
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+        .form-bg{
+            height: auto;
+            width: 15cm;
+            padding: 20px;
+            border-radius: 12px;
+            background: linear-gradient(20deg,#ecacae,rgb(199,230,196),#fad0c4,
+                rgb(185,230,195),rgb(241,196,235),#fad390,#a1c4fd,
+                rgb(138,138,138),rgb(65,92,248));
+            background-size: cover;
+            background-repeat: no-repeat;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        body{
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(20deg,#ecacae,rgb(199,230,196),#fad0c4,rgb(185,230,195),
+            rgb(241,196,235),#fad390,#a1c4fd,rgb(138,138,138),rgb(65,92,248));
+            backdrop-filter: blur(20px);
+            font-family: "Outfit", sans-serif;
+        }
+        label{
+            display: inline-block;
+            width: 200px;
+        }
+        .program-name{
+            padding-left: 30px;
+        }
+        label.required::after{
+            content: " *";
+            color: red;
+        }
+        .hidden{
+            display: none;
+        }
+        .header-text{
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header-text p{
+            color: rgb(95, 95, 95);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .btn-container{
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .btn-style{
+            color: rgb(0, 0, 0);
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .error{
+            color: red;
+            margin-left: 5px;
+            font-size: 12px;
+        }
+        .success{
+            color: green;
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .valid-input {
+            border: 2px solid #28a745;
+        }
+        .invalid-input {
+            border: 2px solid #dc3545;
+        }
+        .character-count {
+            font-size: 11px;
+            color: #666;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; margin: 9%; ">
+        <div class="form-bg" id="formbg">
+            <div class="header-text">
+                <h1>Registration Form</h1>
+                <p>You can register here to book a one-on-one anonymous session. Please provide your personal email address below.</p>
+            </div>
+                <br>
+            <div class="program-name">
+                <label class="required">ZOHO Learning Program</label>
+                <select onchange="toggleForm()" id="program">
+                    <option value="">--Select--</option>
+                    <option value="ZSGS">ZSGS</option>
+                    <option value="PMIS">PMIS</option>
+                </select>
+            </div><br>
+            <div class="program-name"> <!-- ZSGS form contents-->
+                <div id="zsgsform-outer" class="hidden">
+                    <form id="zsgs-form" novalidate>
+                        <h3>Registration form - Anonymous session for ZSGS Candidates</h3>
+                        <label for="zsgs-id" class="required">ZSGS ID</label>
+                        <input type="text" id="zsgs-id" placeholder="Enter your zsgs id" required>
+                        <span class="character-count" id="zsgsIdCount"></span>
+                        <span class="error" id="zsgsIdError"></span><br><br>
+
+                        <label for="zsgs-name" class="required">Name</label>
+                        <input type="text" id="zsgs-name" placeholder="Name?" required>
+                        <span class="error" id="zsgsNameError"></span><br><br>
+
+                        <label for="zsgs-location" class="required">Location</label>
+                        <input type="text" id="zsgs-location" placeholder="Location?" required>
+                        <span class="error" id="zsgsLocationError"></span><br><br>
+
+                        <label for="zsgs-pin" class="required">PIN code</label>
+                        <input type="text" placeholder="PIN?" name="zsgs-pin" id="zsgs-pin" required>
+                        <span class="character-count" id="zsgsPinCount"></span>
+                        <span class="error" id="zsgsPinError"></span><br><br>
+
+                        <h4>Contact Details</h4>
+                        <label for="zsgs-mobile" class="required">Mobile Number</label>
+                        <input type="text" id="zsgs-mobile" placeholder="Mobile Number?" required>
+                        <span class="character-count" id="zsgsMobileCount"></span>
+                        <span class="error" id="zsgsMobileError"></span><br><br>
+
+                        <label for="zsgs-email" class="required">Email</label>
+                        <input type="email" id="zsgs-email" placeholder="Email?" required>
+                        <span class="error" id="zsgsEmailError"></span><br><br>
+
+                        <label for="zsgs-mentor" class="required">Available Mentors</label>
+                        <select id="zsgs-mentor" required>
+                            <option value="">--Choose--</option>
+                            <option value="mentor-1">Nadimuthu</option>
+                            <option value="mentor-2">Thamarai Selvam</option>
+                            <option value="mentor-3">Roohi Fathima</option>
+                            <option value="mentor-4">Mahesh</option>
+                        </select>
+                        <span class="error" id="zsgsMentorError"></span><br><br>
+                        <div class="btn-container">
+                            <button type="submit" class="btn-style">Submit</button>
+                        </div>
+                        <div class="success" id="zsgsSuccess"></div>
+                    </form>
+                </div>
+            </div>
+            <div  class="program-name"> <!-- PMIS form contents-->
+                <div id="pmisform-outer" class="hidden">
+                    <form id="pmis-form" novalidate>
+                        <h3>Registration form - Anonymous session for PMIS Candidates</h3>
+                        <label for="pmis-id" class="required">PMIS ID</label>
+                        <input type="text" id="pmis-id" placeholder="Enter your pmis id" maxlength="9" required>
+                        <span class="character-count" id="pmisIdCount"></span>
+                        <span class="error" id="pmisIdError"></span><br><br>
+
+                        <label for="pmis-name" class="required">Name</label>
+                        <input type="text" id="pmis-name" placeholder="Name?" required>
+                        <span class="error" id="pmisNameError"></span><br><br>
+
+                        <label for="pmis-location" class="required">Location</label>
+                        <input type="text" id="pmis-location" placeholder="Location?" required>
+                        <span class="error" id="pmisLocationError"></span><br><br>
+
+                        <label for="pmis-pin" class="required">PIN code</label>
+                        <input type="text" placeholder="PIN?" name="pmis-pin" id="pmis-pin" required>
+                        <span class="character-count" id="pmisPinCount"></span>
+                        <span class="error" id="pmisPinError"></span><br><br>
+
+                        <h4>Contact Details</h4>
+                        <label for="pmis-mobile" class="required">Mobile Number</label>
+                        <input type="text" id="pmis-mobile" placeholder="Mobile Number?" required>
+                        <span class="character-count" id="pmisMobileCount"></span>
+                        <span class="error" id="pmisMobileError"></span><br><br>
+                        
+                        <label for="pmis-email" class="required">Email</label>
+                        <input type="email" id="pmis-email" placeholder="Email?" required>
+                        <span class="error" id="pmisEmailError"></span><br><br>
+                        
+                        <label for="pmis-mentor" class="required">Available Mentors</label>
+                        <select id="pmis-mentor" required>
+                            <option value="">--Choose--</option>
+                            <option value="mentor-1">Nadimuthu</option>
+                            <option value="mentor-2">Thamarai Selvam</option>
+                            <option value="mentor-3">Roohi Fathima</option>
+                            <option value="mentor-4">Mahesh</option>
+                        </select>
+                        <span class="error" id="pmisMentorError"></span><br><br>
+                        <div class="btn-container">
+                            <button type="submit" class="btn-style">Submit</button>
+                        </div>
+                        <div class="success" id="pmisSuccess"></div>
+                    </form>
+                </div>
+            </div>
+               <div class="btn-container">
+                <button class="btn-style" onclick="changeGradient()">Change Background</button>
+               </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        //List of gradient variations
+        const gradients = [
+            "linear-gradient(20deg,#ecacae,rgb(199,230,130),#fad0c4,rgb(185,230,135),rgb(241,196,235),#fad390,#a1c4fd,rgb(138,138,138),rgb(135,92,248))",
+            "linear-gradient(45deg,#ff9a9e,#fad0c4,#fad390,#a1c4fd,#c2e9fb,#d4fc79,#96e6a1)",
+            "linear-gradient(60deg,#f2eee1,#c7715f,#20bd9d,#cc95c8,#fad0c4,#ffecd2,#fc6076)",
+            "linear-gradient(120deg,#544eed,#3dba22,#aebfaa,#0575e6,#74b0a8,#d9d252,#ff512f,#676902)",
+            "linear-gradient(320deg,#12c2e9,#64c4b8,#26abde,#ff9a10,#ee0979,#00c9ff,#0091ff)",
+            "linear-gradient(160deg,#ebf55f,#feb47b,#b2dbdb,#e3a14f,#c9a475,#9c93fa,#c471ed)",
+            "linear-gradient(20deg,#43e97b,#38f9d7,#30cfd0,#667eea,#764ba2,#6dd5ed)",
+            "linear-gradient(250deg,#f093fb,#f5576c,#fbc2eb,#a6c0fe,#ffdde1,#fc6076,#ff9a9e)",
+            "linear-gradient(300deg,#0093e9,#80d0c7,#a1c4fd,#c2e9fb,#89f7fe,#66a6ff,#2af598)",
+            "linear-gradient(330deg,#cbcadb,#fdffb5,#cbcadb,#00c6ff,#0072ff,#bfb1c9,#383535)"
+        ];
+
+
+        let index = 0; //current gradient index
+
+        function changeGradient() {
+        index = (index + 1) % gradients.length;
+        document.body.style.background = gradients[index];
+        //document.getElementById("formbg").style.background=gradients[index];
+        }
+
+        document.body.addEventListener("click", function(event){
+            const form=document.getElementById("formbg");
+
+            if(!form.contains(event.target)){
+                changeGradient();
+            }
+        });
+
+        function toggleForm(){
+            let selected = document.getElementById("program").value;
+            
+            document.getElementById("zsgsform-outer").classList.add("hidden");
+            document.getElementById("pmisform-outer").classList.add("hidden");
+            
+            clearAllErrors();
+            
+            if(selected == "ZSGS"){
+                document.getElementById("zsgsform-outer").classList.remove("hidden");
+
+                document.getElementById("zsgsIdCount").textContent = "0/12";
+                document.getElementById("zsgsPinCount").textContent = "0/6";
+                document.getElementById("zsgsMobileCount").textContent = "0/10";
+            } else if(selected == "PMIS"){
+                document.getElementById("pmisform-outer").classList.remove("hidden");
+
+                document.getElementById("pmisIdCount").textContent = "0/9";
+                document.getElementById("pmisPinCount").textContent = "0/6";
+                document.getElementById("pmisMobileCount").textContent = "0/10";
+            }
+        }
+
+        function showErrors(id,message){
+            document.getElementById(id).textContent=message;
+        }
+        function clearErrors(formId){
+            document.querySelectorAll(`#${formId} .error`).forEach(span=>{
+                span.textContent="";
+            });
+            document.querySelectorAll('.success').forEach(div => {
+                div.textContent = "";
+            });
+        }
+
+        function clearAllErrors() {
+            document.querySelectorAll('.error').forEach(span => {
+                span.textContent = "";
+            });
+            document.querySelectorAll('input, select').forEach(element => {
+                element.classList.remove('valid-input', 'invalid-input');
+            });
+        }
+
+        function setupInputRestrictions(inputId, maxLength, allowOnlyNumbers = false) {
+            const input = document.getElementById(inputId);
+            const countElement = document.getElementById(inputId + 'Count');
+            
+            if (!input) return;
+
+            input.addEventListener('input', function(e) {
+                let value = this.value;
+
+                if (allowOnlyNumbers) {
+                    value = value.replace(/[^0-9]/g, '');
+                }
+
+                if (value.length > maxLength) {
+                    value = value.substring(0, maxLength);
+                }
+
+                this.value = value;
+
+                if (countElement) {
+                    countElement.textContent = `${value.length}/${maxLength}`;
+                    
+                    if (value.length === maxLength) {
+                        countElement.style.color = '#dc3545';
+                    } else if (value.length > maxLength * 0.8) {
+                        countElement.style.color = '#ffc107';
+                    } else {
+                        countElement.style.color = '#666';
+                    }
+                }
+            });
+
+            input.addEventListener('paste', function(e) {
+                setTimeout(() => {
+                    let value = this.value;
+                    if (allowOnlyNumbers) {
+                        value = value.replace(/[^0-9]/g, '');
+                    }
+                    if (value.length > maxLength) {
+                        this.value = value.substring(0, maxLength);
+                    }
+                    
+                    
+                    if (countElement) {
+                        countElement.textContent = `${this.value.length}/${maxLength}`;
+                    }
+                }, 0);
+            });
+        }
+
+        function setupRealTimeValidation() {
+
+            setupFieldValidation('zsgs-id', /^[0-9a-zA-Z\-\/]{12}$/, "ZSGS ID must be exactly 12 characters (letters, numbers, -, /)", true);
+            setupFieldValidation('zsgs-name', /^[A-Za-z]+(\s[A-Za-z]+)*$/, "Name should contain only letters and spaces (no leading/trailing spaces)");
+            setupFieldValidation('zsgs-location', /^[A-Za-z]+(\s[A-Za-z]+)*$/, "Location should contain only letters and spaces");
+            setupFieldValidation('zsgs-pin', /^[0-9]{6}$/, "PIN Code must be exactly 6 digits", true);
+            setupFieldValidation('zsgs-mobile', /^[6-9][0-9]{9}$/, "Mobile number must start with 6-9 and be exactly 10 digits", true);
+            setupFieldValidation('zsgs-email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Please enter a valid email address");
+            
+            setupFieldValidation('pmis-id', /^[0-9a-zA-Z\-\/]{1,9}$/, "PMIS ID must be 1-9 characters (letters, numbers, -, /)", true);
+            setupFieldValidation('pmis-name', /^[A-Za-z]+(\s[A-Za-z]+)*$/, "Name should contain only letters and spaces (no leading/trailing spaces)");
+            setupFieldValidation('pmis-location', /^[A-Za-z]+(\s[A-Za-z]+)*$/, "Location should contain only letters and spaces");
+            setupFieldValidation('pmis-pin', /^[0-9]{6}$/, "PIN Code must be exactly 6 digits", true);
+            setupFieldValidation('pmis-mobile', /^[6-9][0-9]{9}$/, "Mobile number must start with 6-9 and be exactly 10 digits", true);
+            setupFieldValidation('pmis-email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Please enter a valid email address");
+
+            setupSelectValidation('zsgs-mentor', "Please select a mentor");
+            setupSelectValidation('pmis-mentor', "Please select a mentor");
+        }
+
+        function setupFieldValidation(inputId, pattern, errorMessage, exactMatch = false) {
+            const input = document.getElementById(inputId);
+            const errorSpan = document.getElementById(inputId + 'Error');
+            
+            if (!input || !errorSpan) return;
+
+            input.addEventListener('input', function() {
+                const value = this.value.trim();
+                
+                if (value === '') {
+                    errorSpan.textContent = '';
+                    this.classList.remove('valid-input', 'invalid-input');
+                    return;
+                }
+
+                const isValid = exactMatch ? pattern.test(value) : (value.length > 0 && pattern.test(value));
+                
+                if (isValid) {
+                    errorSpan.textContent = '';
+                    this.classList.remove('invalid-input');
+                    this.classList.add('valid-input');
+                } else {
+                    errorSpan.textContent = errorMessage;
+                    this.classList.remove('valid-input');
+                    this.classList.add('invalid-input');
+                }
+            });
+
+            input.addEventListener('blur', function() {
+                const value = this.value.trim();
+                if (value === '') {
+                    errorSpan.textContent = inputId.includes('zsgs') ? 
+                        errorMessage.replace('must be', 'is required') : 
+                        errorMessage.replace('must be', 'is required');
+                    this.classList.remove('valid-input');
+                    this.classList.add('invalid-input');
+                }
+            });
+        }
+
+        function setupSelectValidation(selectId, errorMessage) {
+            const select = document.getElementById(selectId);
+            const errorSpan = document.getElementById(selectId + 'Error');
+            
+            if (!select || !errorSpan) return;
+
+            select.addEventListener('change', function() {
+                if (this.value === '') {
+                    errorSpan.textContent = errorMessage;
+                    this.classList.remove('valid-input');
+                    this.classList.add('invalid-input');
+                } else {
+                    errorSpan.textContent = '';
+                    this.classList.remove('invalid-input');
+                    this.classList.add('valid-input');
+                }
+            });
+        }
+
+
+        function validateZSGSForm() {
+            let isValid = true;
+            clearErrors("zsgs-form");
+
+            const zsgsId = document.getElementById("zsgs-id").value.trim();
+            const zsgsName = document.getElementById("zsgs-name").value.trim();
+            const zsgsLocation = document.getElementById("zsgs-location").value.trim();
+            const zsgsPin = document.getElementById("zsgs-pin").value.trim();
+            const zsgsMobile = document.getElementById("zsgs-mobile").value.trim();
+            const zsgsEmail = document.getElementById("zsgs-email").value.trim();
+            const zsgsMentor = document.getElementById("zsgs-mentor").value;
+
+
+            const zsgsIdPattern = /^[0-9a-zA-Z\-\/]{12}$/;
+            const namePattern = /^[A-Za-z]+(\s[A-Za-z]+)*$/;
+            const locationPattern = /^[A-Za-z]+(\s[A-Za-z]+)*$/;
+            const pinPattern = /^[0-9]{6}$/;
+            const mobilePattern = /^[6-9][0-9]{9}$/;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+            if(zsgsId === "" || !zsgsIdPattern.test(zsgsId)) {
+                showErrors("zsgsIdError", zsgsId === "" ? "ZSGS ID is required" : "ZSGS ID must be exactly 12 characters (letters, numbers, -, /)");
+                isValid = false;
+            }
+
+            if(zsgsName === "" || !namePattern.test(zsgsName)) {
+                showErrors("zsgsNameError", zsgsName === "" ? "Name is required" : "Name should contain only letters and spaces");
+                isValid = false;
+            }
+
+            if(zsgsLocation === "" || !locationPattern.test(zsgsLocation)) {
+                showErrors("zsgsLocationError", zsgsLocation === "" ? "Location is required" : "Location should contain only letters and spaces");
+                isValid = false;
+            }
+
+            if(zsgsPin === "" || !pinPattern.test(zsgsPin)) {
+                showErrors("zsgsPinError", zsgsPin === "" ? "PIN Code is required" : "PIN Code must be exactly 6 digits");
+                isValid = false;
+            }
+
+            if(zsgsMobile === "" || !mobilePattern.test(zsgsMobile)) {
+                showErrors("zsgsMobileError", zsgsMobile === "" ? "Mobile number is required" : "Mobile number must be exactly 10 digits");
+                isValid = false;
+            }
+
+            if(zsgsEmail === "" || !emailPattern.test(zsgsEmail)) {
+                showErrors("zsgsEmailError", zsgsEmail === "" ? "Email is required" : "Please enter a valid email address");
+                isValid = false;
+            }
+
+            if(zsgsMentor === "") {
+                showErrors("zsgsMentorError", "Please select a mentor");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function validatePMISForm() {
+            let isValid = true;
+            clearErrors("pmis-form");
+
+            const pmisId = document.getElementById("pmis-id").value.trim();
+            const pmisName = document.getElementById("pmis-name").value.trim();
+            const pmisLocation = document.getElementById("pmis-location").value.trim();
+            const pmisPin = document.getElementById("pmis-pin").value.trim();
+            const pmisMobile = document.getElementById("pmis-mobile").value.trim();
+            const pmisEmail = document.getElementById("pmis-email").value.trim();
+            const pmisMentor = document.getElementById("pmis-mentor").value;
+
+            const namePattern = /^[A-Za-z]+(\s[A-Za-z]+)*$/;
+            const locationPattern = /^[A-Za-z]+(\s[A-Za-z]+)*$/;
+            const pinPattern = /^[0-9]{6}$/;
+            const mobilePattern = /^[6-9][0-9]{9}$/;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if(pmisId === "") {
+                showErrors("pmisIdError", "PMIS ID is required");
+                isValid = false;
+            }
+
+            if(pmisName === "" || !namePattern.test(pmisName)) {
+                showErrors("pmisNameError", pmisName === "" ? "Name is required" : "Name should contain only letters and spaces");
+                isValid = false;
+            }
+
+            if(pmisLocation === "" || !locationPattern.test(pmisLocation)) {
+                showErrors("pmisLocationError", pmisLocation === "" ? "Location is required" : "Location should contain only letters and spaces");
+                isValid = false;
+            }
+
+            if(pmisPin === "" || !pinPattern.test(pmisPin)) {
+                showErrors("pmisPinError", pmisPin === "" ? "PIN Code is required" : "PIN Code must be exactly 6 digits");
+                isValid = false;
+            }
+
+            if(pmisMobile === "" || !mobilePattern.test(pmisMobile)) {
+                showErrors("pmisMobileError", pmisMobile === "" ? "Mobile number is required" : "Mobile number must be exactly 10 digits");
+                isValid = false;
+            }
+
+            if(pmisEmail === "" || !emailPattern.test(pmisEmail)) {
+                showErrors("pmisEmailError", pmisEmail === "" ? "Email is required" : "Please enter a valid email address");
+                isValid = false;
+            }
+
+            if(pmisMentor === "") {
+                showErrors("pmisMentorError", "Please select a mentor");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        document.getElementById("zsgs-form").addEventListener("submit", function(e){
+            e.preventDefault();
+            
+            if(validateZSGSForm()) {
+                document.getElementById("zsgsSuccess").textContent = "ZSGS Form submitted successfully!";
+                setTimeout(() => {
+                    document.getElementById("zsgs-form").reset();
+                    document.getElementById("zsgsSuccess").textContent = "";
+                    
+                    document.getElementById("zsgsIdCount").textContent = "0/12";
+                    document.getElementById("zsgsPinCount").textContent = "0/6";
+                    document.getElementById("zsgsMobileCount").textContent = "0/10";
+                    clearAllErrors();
+                }, 3000);
+            }
+        });
+
+        document.getElementById("pmis-form").addEventListener("submit", function(e){
+            e.preventDefault();
+            
+            if(validatePMISForm()) {
+                document.getElementById("pmisSuccess").textContent = "PMIS Form submitted successfully!";
+                setTimeout(() => {
+                    document.getElementById("pmis-form").reset();
+                    document.getElementById("pmisSuccess").textContent = "";
+                    
+                    document.getElementById("pmisIdCount").textContent = "0/9";
+                    document.getElementById("pmisPinCount").textContent = "0/6";
+                    document.getElementById("pmisMobileCount").textContent = "0/10";
+                    clearAllErrors();
+                }, 3000);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setupInputRestrictions('zsgs-id', 12);
+            setupInputRestrictions('zsgs-pin', 6, true);     // Only numbers
+            setupInputRestrictions('zsgs-mobile', 10, true); // Only numbers
+            
+            setupInputRestrictions('pmis-id', 9);
+            setupInputRestrictions('pmis-pin', 6, true);     // Only numbers
+            setupInputRestrictions('pmis-mobile', 10, true); // Only numbers
+            
+            setupRealTimeValidation();
+        });
+
+    </script>
+</body>
+</html>

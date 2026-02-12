@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alien Immigration Portal</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 0;
+  }
+  
+  .container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #667eea;
+    margin: 0 0 10px 0;
+    font-size: 32px;
+  }
+  
+  .subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 14px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
+  }
+  
+  input:focus, select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+  
+  input::placeholder {
+    color: #999;
+  }
+  
+  .hint {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+    font-style: italic;
+  }
+  
+  .error {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+    font-weight: 500;
+  }
+  
+  .error.show {
+    display: block;
+  }
+  
+  button {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  }
+  
+  button:active {
+    transform: translateY(0);
+  }
+  
+  .success-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .success-content {
+    background: white;
+    padding: 50px 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    animation: slideUp 0.3s;
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  .success-content h2 {
+    color: #667eea;
+    margin: 0 0 20px 0;
+  }
+  
+  .success-emoji {
+    font-size: 80px;
+    margin: 20px 0;
+  }
+  
+  .success-content button {
+    margin-top: 20px;
+    background: #667eea;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>👽 Alien Immigration Portal 🛸</h1>
+  <p class="subtitle">Welcome to Earth! Please complete your registration.</p>
+  
+  <form id="alienForm">
+    <div class="form-group">
+      <label for="planetName">🪐 Planet of Origin *</label>
+      <input type="text" id="planetName" placeholder="e.g., Mars5, Venus3" required>
+      <div class="hint">Must contain at least one vowel and one digit</div>
+      <div class="error" id="planetError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="antennaCount">📡 Number of Antennas *</label>
+      <input type="number" id="antennaCount" placeholder="e.g., 2, 4, 6" min="0" step="2" required>
+      <div class="hint">Only even numbers allowed</div>
+      <div class="error" id="antennaError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="alienId">🆔 Alien Identification Code *</label>
+      <input type="text" id="alienId" placeholder="ZOR-XY_9999@UFO" required>
+      <div class="hint">Format: XXX-XX_####@UFO (all caps)</div>
+      <div class="error" id="idError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="humanPhrase">💬 Favorite Human Phrase *</label>
+      <input type="text" id="humanPhrase" placeholder="e.g., Hello, World! 😊" required>
+      <div class="hint">Must include emoji or punctuation</div>
+      <div class="error" id="phraseError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="landingDate">📅 Expected Landing Date *</label>
+      <input type="date" id="landingDate" required>
+      <div class="hint">Cannot be in the past</div>
+      <div class="error" id="dateError"></div>
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="earthLanguage">🗣️ Preferred Earth Language *</label>
+      <select id="earthLanguage" required>
+        <option value="">Select language</option>
+        <option value="English">English</option>
+        <option value="Spanish">Spanish</option>
+        <option value="Mandarin">Mandarin</option>
+        <option value="French">French</option>
+        <option value="German">German</option>
+        <option value="Japanese">Japanese</option>
+      </select>
+      <div class="error" id="languageError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="visitPurpose">🎯 Purpose of Visit *</label>
+      <input type="text" id="visitPurpose" placeholder="e.g., Tourism, Research, Trade" required>
+      <div class="hint">Brief description of your mission</div>
+      <div class="error" id="purposeError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="earthFood">🍕 Favorite Earth Food (Optional)</label>
+      <input type="text" id="earthFood" placeholder="e.g., Pizza, Tacos">
+      <div class="hint">No numbers allowed</div>
+      <div class="error" id="foodError"></div>
+    </div>
+
+
+
+    <button type="submit">🚀 Complete Registration</button>
+  </form>
+</div>
+
+<div class="success-modal" id="successModal">
+  <div class="success-content">
+    <h2>Registration Complete! ✅</h2>
+    <div class="success-emoji">🛸</div>
+    <p style="font-size: 18px; color: #333;">Welcome to Earth, space traveler!</p>
+    <p style="color: #666;">Your immigration permit has been approved.</p>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+function validatePlanetName(value) {
+  const hasVowel = /[aeiouAEIOU]/.test(value);
+  const hasDigit = /\d/.test(value);
+  return hasVowel && hasDigit;
+}
+
+function validateAntennaCount(value) {
+  const num = parseInt(value, 10);
+  return !isNaN(num) && num >= 0 && num % 2 === 0;
+}
+
+function validateAlienId(value) {
+  const pattern = /^[A-Z]{3}-[A-Z]{2}_\d{4}@UFO$/;
+  return pattern.test(value);
+}
+
+function validateHumanPhrase(value) {
+  const hasPunctuation = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
+  const hasEmoji = /[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/u.test(value);
+  return hasPunctuation || hasEmoji;
+}
+
+function validateLandingDate(dateString) {
+  const landingDate = new Date(dateString);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  if (isNaN(landingDate.getTime())) {
+    return { valid: false, message: 'Please select a valid date' };
+  }
+  
+  if (landingDate < today) {
+    return { valid: false, message: 'Landing date cannot be in the past' };
+  }
+  
+  return { valid: true };
+}
+
+function validateEmail(value) {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(value);
+}
+
+function validateNoNumbers(value) {
+  return !/\d/.test(value);
+}
+
+function showError(id, message) {
+  const error = document.getElementById(id);
+  error.textContent = message;
+  error.classList.add('show');
+}
+
+function hideError(id) {
+  const error = document.getElementById(id);
+  error.classList.remove('show');
+}
+
+function hideAllErrors() {
+  document.querySelectorAll('.error').forEach(el => el.classList.remove('show'));
+}
+
+function closeModal() {
+  document.getElementById('successModal').style.display = 'none';
+  document.getElementById('alienForm').reset();
+}
+
+document.getElementById('alienForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  hideAllErrors();
+  
+  let isValid = true;
+  
+  const planetName = document.getElementById('planetName').value.trim();
+  const antennaCount = document.getElementById('antennaCount').value;
+  const alienId = document.getElementById('alienId').value.trim();
+  const humanPhrase = document.getElementById('humanPhrase').value.trim();
+  const landingDate = document.getElementById('landingDate').value;
+  const earthLanguage = document.getElementById('earthLanguage').value;
+  const visitPurpose = document.getElementById('visitPurpose').value.trim();
+  const earthFood = document.getElementById('earthFood').value.trim();
+  
+  if (!validatePlanetName(planetName)) {
+    showError('planetError', 'Planet name must contain at least one vowel AND one digit');
+    isValid = false;
+  }
+  
+  if (!validateAntennaCount(antennaCount)) {
+    showError('antennaError', 'Antenna count must be an even number (0, 2, 4, 6...)');
+    isValid = false;
+  }
+  
+  if (!validateAlienId(alienId)) {
+    showError('idError', 'Invalid format. Use: XXX-XX_####@UFO (e.g., ZOR-XY_9999@UFO)');
+    isValid = false;
+  }
+  
+  if (!validateHumanPhrase(humanPhrase)) {
+    showError('phraseError', 'Phrase must contain at least one emoji or punctuation mark');
+    isValid = false;
+  }
+  
+  const dateValidation = validateLandingDate(landingDate);
+  if (!dateValidation.valid) {
+    showError('dateError', dateValidation.message);
+    isValid = false;
+  }
+  
+  if (!earthLanguage) {
+    showError('languageError', 'Please select your preferred language');
+    isValid = false;
+  }
+  
+  if (!visitPurpose || visitPurpose.length < 3) {
+    showError('purposeError', 'Please describe your purpose (at least 3 characters)');
+    isValid = false;
+  }
+  
+  if (earthFood && !validateNoNumbers(earthFood)) {
+    showError('foodError', 'Food name cannot contain numbers');
+    isValid = false;
+  }
+  
+  if (isValid) {
+    document.getElementById('successModal').style.display = 'flex';
+  }
+});
+
+document.getElementById('planetName').addEventListener('blur', function() {
+  const value = this.value.trim();
+  if (value && !validatePlanetName(value)) {
+    showError('planetError', 'Planet name must contain at least one vowel AND one digit');
+  } else {
+    hideError('planetError');
+  }
+});
+
+document.getElementById('antennaCount').addEventListener('blur', function() {
+  if (this.value && !validateAntennaCount(this.value)) {
+    showError('antennaError', 'Antenna count must be an even number');
+  } else {
+    hideError('antennaError');
+  }
+});
+
+document.getElementById('alienId').addEventListener('blur', function() {
+  const value = this.value.trim();
+  if (value && !validateAlienId(value)) {
+    showError('idError', 'Invalid format. Use: XXX-XX_####@UFO');
+  } else {
+    hideError('idError');
+  }
+});
+
+document.getElementById('humanPhrase').addEventListener('blur', function() {
+  const value = this.value.trim();
+  if (value && !validateHumanPhrase(value)) {
+    showError('phraseError', 'Phrase must contain emoji or punctuation');
+  } else {
+    hideError('phraseError');
+  }
+});
+
+document.getElementById('landingDate').addEventListener('blur', function() {
+  if (this.value) {
+    const validation = validateLandingDate(this.value);
+    if (!validation.valid) {
+      showError('dateError', validation.message);
+    } else {
+      hideError('dateError');
+    }
+  }
+});
+
+document.getElementById('earthFood').addEventListener('blur', function() {
+  const value = this.value.trim();
+  if (value && !validateNoNumbers(value)) {
+    showError('foodError', 'Food name cannot contain numbers');
+  } else {
+    hideError('foodError');
+  }
+});
+</script>
+
+</body>
+</html>

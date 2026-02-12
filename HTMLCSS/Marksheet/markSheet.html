@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marksheet</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      
+      justify-content: center;
+      align-items: center;
+      font-family: 'Outfit', sans-serif;
+    }
+    p{
+      font-size: 12px;
+    }
+    .container{
+      background-image: url(white.png);
+      background-size: 330px;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 280mm;
+      width: 200mm;
+      border: 15px groove rgb(0, 0, 0);
+      background-color: rgb(202, 240, 237);
+    }
+    .header{
+      margin: 5px;
+      display: flex;
+      flex-direction: row;
+    }
+    .golden-logo{
+      display: flex;
+      justify-content: flex-start;
+      position: relative;
+      right: 15px;
+      top: 15px;
+    }
+    .anna-univ{
+      text-align: center;
+    }
+    .my-photo{
+      display: flex;
+      position: relative;
+      left: 110px;
+      top: 20px;
+      justify-content: flex-end;
+    }
+    .gs-row {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      font-size: 15px;
+      position: relative;
+      top: 10px;
+    }
+    .gs-label {
+      font-weight: bold;
+      color: #394048;
+      letter-spacing: 1px;
+    }
+    .gs-value {
+      font-size: 18px;
+      font-weight: bold;
+      color: #232222;
+      margin-left: 1px;
+    }
+    .gs-folio {
+      min-width: 180px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      left: 120px;
+    }
+    .gs-folio .gs-label {
+      font-weight: normal;
+      color: #32334f;
+      font-size: 15px;
+      margin-right: 3px;
+    }
+    .gs-folio .gs-value {
+      font-size: 15px;
+      font-weight: bold;
+      color: #232222;
+    }
+    table{
+      min-width: 41vw;
+      border-collapse: collapse;
+      text-align: center;
+    }
+    td{
+      font-size: 12px;
+      border: 1px solid;
+      padding: 2px;
+    }
+    .course tr{
+      border-bottom: hidden;
+    }
+    .marks{
+      min-width: 41vw;
+    }
+    .footer{
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+    }
+    .note-div{
+      background-color: #a6b2c7bd;
+      padding-top: 5px;
+    }
+    .note{
+      display: flex;
+      flex-direction: row;
+      font-size: 12px;
+      justify-content: space-between;
+    }
+    .sign{
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 0;
+      
+    }
+    .controller{
+      display: flex;
+      flex-direction: column;
+      margin-top: 15px;
+      margin-left: 30px;
+    }
+    .bg-orange{
+      background-color: rgb(245, 228, 213);
+    }
+    .black-logo{
+      height: 100px;
+    }
+    .seal{
+      height: 100px;
+      position: relative;
+      bottom: 40px;
+    }
+    .color-blue{
+      color: #326299;
+    }
+    .left-align{
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header"><!--header-->
+      <div class="golden-logo">
+        <img src="golden.png" style="height: 120px; margin: 0;" alt="">
+      </div>
+      
+      <div class="anna-univ">
+        <div style="position: relative;left: 75px;">
+          <h3 class="color-blue">ANNA UNIVERSITY, CHENNAI-25</h3>
+          <div style="position: relative;"><h3 class="color-blue">DEGREE EXAMINATIONS</h3></div>
+          <div style="position: absolute; top: 35px;right: 93%;">
+            <strong>B.Tech.  </strong>
+          </div>
+          <h3 class="color-blue">GRADE SHEET</h3>
+        </div>
+        <div class="gs-row">
+          <span class="gs-label color-blue">Sl.No: <span style="color:#2454a2;"><strong>MA</strong></span></span>
+          <span class="gs-value">5434090</span>
+          <span class="gs-folio">
+            <span class="color-blue" class="gs-label">Folio No.&nbsp;</span>
+            <span class="gs-value">AU1715451</span>
+          </span>
+        </div>
+      </div>
+      <div class="my-photo">
+        <img src="kk phot_1 (1).jpg" height="80px" style="margin:7px 30px;" alt="">
+      </div>
+    </div>
+
+    <div class="content"><!--table contents-->
+      <table>
+        <tr>
+          <td class="color-blue left-align">NAME OF THE CANDIDATE</td>
+          <td colspan="5" class="left-align">KALAISELVAN K</td>
+          <td class="color-blue left-align" >REGISTER NO.</td>
+          <td class="bg-orange"><strong>812620205020</strong></td>
+          
+        </tr>
+        <tr>
+          <td class="color-blue left-align">DATE OF BIRTH</td>
+          <td class="bg-orange"><strong>15-OCT-2003</strong></td>
+          <td class="color-blue left-align">GENDER</td>
+          <td class="bg-orange"><strong>MALE</strong></td>
+          <td class="color-blue">MONTH & YEAR OF EXAMINATION</td>
+          <td class="bg-orange"><strong>APR 2023</strong></td>
+          <td class="color-blue">DATE OF PUBLICATIONS</td>
+          <td class="bg-orange"><strong>28-AUG-2023</strong></td>
+        </tr>
+        <tr>
+          <td class="color-blue left-align">COLLEGE OF STUDY</td>
+          <td colspan="5" class="left-align">M.A.M. COLLEGE OF ENGINEERING</td>
+          <td class="color-blue">REGULATIONS</td>
+          <td class="bg-orange"><strong>2017(CBCS)</strong></td>
+        </tr>
+        <tr>
+          <td class="color-blue left-align">PROGRAMME & BRANCH</td>
+          <td colspan="7" class="left-align">B.Tech. Information Technologia</td>
+        </tr>
+        
+      </table> <!--course details-->
+      <table class="course">
+        <tr style="border-bottom: black;">
+          <td class="color-blue">SEM.NO.</td>
+          <td class="color-blue">COURSE CODE</td>
+          <td class="color-blue" style="background-color:#7e859180;">COURSE TITLE</td>
+          <td class="color-blue">CREDITS</td>
+          <td class="color-blue">LETTER GRADE</td>
+          <td class="color-blue">GRADE POINT</td>
+          <td class="color-blue">RESULT</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>CS8085</td>
+          <td class="left-align" >Social Network Analysis</td>
+          <td>3</td>
+          <td>B+</td>
+          <td>7</td>
+          <td>PASS</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>CS8091</td>
+          <td class="left-align">Big Data Analytics</td>
+          <td>3</td>
+          <td>B+</td>
+          <td>7</td>
+          <td>PASS</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>CS8092</td>
+          <td class="left-align">Computer Graphics Multimedia</td>
+          <td>3</td>
+          <td>B+</td>
+          <td>7</td>
+          <td>PASS</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>CS8582</td>
+          <td class="left-align">Object Oriented Analysis and Design Laboratory</td>
+          <td>2</td>
+          <td>A+</td>
+          <td>9</td>
+          <td>PASS</td></tr>
+        <tr>
+          <td>06</td>
+          <td>CS8592</td>
+          <td class="left-align">Object Oriented Analysis and Design</td>
+          <td>3</td>
+          <td>B</td>
+          <td>6</td>
+          <td>PASS</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>CS8662</td>
+          <td class="left-align">Mobile Application Development Laboratory</td>
+          <td>2</td>
+          <td>A+</td>
+          <td>9</td>
+          <td>PASS</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>HS8581</td>
+          <td class="left-align">Professional Communication</td>
+          <td>1</td>
+          <td>A</td>
+          <td>8</td>
+          <td>PASS</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>IT8601</td>
+          <td class="left-align">Computational Intelligence</td>
+          <td>3</td>
+          <td>B</td>
+          <td>6</td>
+          <td>PASS</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>IT8602</td>
+          <td class="left-align">Mobile Communication</td>
+          <td>3</td>
+          <td>B</td>
+          <td>6</td>
+          <td>PASS</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>IT8611</td>
+          <td class="left-align">Mini Project</td>
+          <td>1</td>
+          <td>A+</td>
+          <td>9</td>
+          <td>PASS</td>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>SB8014**</td>
+          <td class="left-align">Full Stack</td>
+          <td>2</td>
+          <td>A+</td>
+          <td>9</td>
+          <td>PASS</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>SB8040</td>
+          <td class="left-align">Professional Readiness for Innovation, Employement and Entrepreneurship </td>
+          <td>2</td>
+          <td>O</td>
+          <td>10</td>
+          <td>PASS</td>
+        </tr>
+        <tr style="height: 250px;">
+          <td></td>
+          <td></td>
+          <td style="position: relative; bottom: 100px;">* * * End Of Statement * * *</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      <table class="marks"> <!--current semester wise calculation-->
+        <tr>
+          <td class="color-blue left-align">Semester</td>
+          <td class="color-blue">I</td>
+          <td class="color-blue">II</td>
+          <td class="color-blue">III</td>
+          <td class="color-blue">IV</td>
+          <td class="color-blue">V</td>
+          <td class="color-blue">VI</td>
+          <td class="color-blue">VII</td>
+          <td class="color-blue">VIII</td>
+          <td class="color-blue">IX</td>
+          <td class="color-blue">X</td>
+        </tr>
+        <tr>
+          <td class="color-blue left-align">Credits Registered</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>27</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="color-blue left-align">Credits Earned</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>27</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="color-blue left-align">Grade Points Earned</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>93</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="color-blue left-align">Grade Point Average(GPA)</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>7.370</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="color-blue left-align">Cumulative Points Earned</td>
+          <td>150</td>
+          <td class="color-blue" colspan="4">Cumulative Grade Point Average(CGPA)</td>
+          <td>7.80</td>
+          <td class="color-blue" colspan="4">Medium of Instruction : ENGLISH</td>
+        </tr>
+      </table>
+      <div class="footer">
+        <div class="note-div">
+          <div class="note">
+            <p class="color-blue"><strong>RA - Reappearence is required</strong></p>
+            <p class="color-blue"><strong>W - Withdrawal</strong></p>
+            <p class="color-blue"><strong>SE - Sports Exemption</strong></p>
+            <p class="color-blue"><strong>* Absent for University Examination</strong></p>
+          </div>
+        </div>
+
+        <div class="sign">
+          <div style="margin-top: 45px;">
+            <p style="color: orange;">Chennai - 600 025.</p>
+            <p style="color: orange;">Date: <pre style="position: relative; bottom: 15px;">     11-01-2024</pre></p>
+          </div>
+          <div>
+            <img src="ChatGPT Image Sep 1, 2025, 07_42_46 PM.png" class="seal" Seal of controller of exam">
+          </div>
+          <div>
+            <p class="color-blue" style="margin-top: 59px; ">SIGNATURE OF THE CANDIDATE</p>
+          </div>
+          <div>
+            <img src="black.png" class="black-logo" alt="anna university seal">
+          </div>
+          <div class="controller">
+            <img src="staffSign.png" style="position: relative; right:35px ;" alt="Controller of exam sign">
+            <p class="color-blue"><strong>CONTROLLER OF EXAMINATIONS i/c</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

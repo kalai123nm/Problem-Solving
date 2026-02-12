@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meme Caption Lab</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .header {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+
+  h1 {
+    color: #667eea;
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .create-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+    width: 100%;
+  }
+
+  .create-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .empty-state {
+    background: white;
+    border-radius: 20px;
+    padding: 60px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .empty-state p {
+    font-size: 24px;
+    color: #999;
+    margin-bottom: 10px;
+  }
+
+  .memes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+  }
+
+  .meme-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+  }
+
+  .meme-card:hover {
+    transform: scale(1.05);
+  }
+
+  .meme-image-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+  }
+
+  .meme-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .meme-text {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+    word-wrap: break-word;
+  }
+
+  .meme-text-top {
+    top: 0;
+  }
+
+  .meme-text-bottom {
+    bottom: 0;
+  }
+
+  .meme-info {
+    padding: 20px;
+  }
+
+  .meme-template-name {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+  }
+
+  .meme-date {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 15px;
+  }
+
+  .meme-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .edit-btn, .delete-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .edit-btn {
+    background: #3498db;
+    color: white;
+  }
+
+  .edit-btn:hover {
+    background: #2980b9;
+  }
+
+  .delete-btn {
+    background: #e74c3c;
+    color: white;
+  }
+
+  .delete-btn:hover {
+    background: #c0392b;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px;
+  }
+
+  .modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-header {
+    padding: 25px;
+    border-bottom: 2px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+  }
+
+  .modal-header h2 {
+    color: #333;
+    font-size: 24px;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #999;
+  }
+
+  .close-btn:hover {
+    color: #333;
+  }
+
+  .modal-body {
+    padding: 25px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  .templates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .template-card {
+    cursor: pointer;
+    border: 4px solid transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .template-card:hover {
+    border-color: #ddd;
+  }
+
+  .template-card.selected {
+    border-color: #667eea;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+  }
+
+  .template-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .template-name {
+    background: #f5f5f5;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+  }
+
+  .preview-container {
+    margin-bottom: 25px;
+  }
+
+  .preview-image-container {
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .preview-image {
+    width: 100%;
+    display: block;
+  }
+
+  .save-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .save-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .caption-section {
+    display: none;
+  }
+
+  .caption-section.active {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>🎨 Meme Caption Lab 😂</h1>
+    <p class="subtitle">Create, Edit, and Delete Your Memes!</p>
+    <button class="create-btn" onclick="openCreateModal()">➕ Create New Meme</button>
+  </div>
+
+  <div id="memesContainer">
+    <div class="empty-state">
+      <p>No memes yet! 😢</p>
+      <p style="font-size: 16px; color: #666;">Click "Create New Meme" to get started!</p>
+    </div>
+  </div>
+</div>
+
+<!-- Create/Edit Modal -->
+<div id="memeModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitle">Create New Meme</h2>
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="section-title">1. Choose a Template</div>
+      <div class="templates-grid" id="templatesGrid"></div>
+
+      <div id="captionSection" class="caption-section">
+        <div class="section-title">2. Add Your Captions</div>
+        <div class="form-group">
+          <label>Top Text</label>
+          <input type="text" id="topTextInput" placeholder="Enter top text">
+        </div>
+        <div class="form-group">
+          <label>Bottom Text</label>
+          <input type="text" id="bottomTextInput" placeholder="Enter bottom text">
+        </div>
+
+        <div class="section-title">3. Preview</div>
+        <div class="preview-container">
+          <div class="preview-image-container">
+            <img id="previewImage" class="preview-image" src="" alt="Preview">
+            <div class="meme-text meme-text-top" id="previewTopText"></div>
+            <div class="meme-text meme-text-bottom" id="previewBottomText"></div>
+          </div>
+        </div>
+
+        <button class="save-btn" onclick="saveMeme()">💾 Save Meme</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const memeTemplates = [
+  {
+    id: 1,
+    name: "Distracted Boyfriend",
+    url: "https://i.imgflip.com/1ur9b0.jpg"
+  },
+  {
+    id: 2,
+    name: "Drake Hotline Bling",
+    url: "https://i.imgflip.com/30b1gx.jpg"
+  },
+  {
+    id: 3,
+    name: "Two Buttons",
+    url: "https://i.imgflip.com/1g8my4.jpg"
+  },
+  {
+    id: 4,
+    name: "Left Exit 12 Off Ramp",
+    url: "https://i.imgflip.com/22bdq6.jpg"
+  },
+  {
+    id: 5,
+    name: "Running Away Balloon",
+    url: "https://i.imgflip.com/261o3j.jpg"
+  },
+  {
+    id: 6,
+    name: "Change My Mind",
+    url: "https://i.imgflip.com/24y43o.jpg"
+  }
+];
+
+let memes = [];
+let selectedTemplate = null;
+let editingMemeId = null;
+
+// Initialize templates grid
+function initTemplates() {
+  const grid = document.getElementById('templatesGrid');
+  grid.innerHTML = '';
+  
+  memeTemplates.forEach(template => {
+    const card = document.createElement('div');
+    card.className = 'template-card';
+    card.onclick = () => selectTemplate(template);
+    card.innerHTML = `
+      <img src="${template.url}" alt="${template.name}" class="template-image">
+      <div class="template-name">${template.name}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// Select template
+function selectTemplate(template) {
+  selectedTemplate = template;
+  
+  // Update selected state
+  document.querySelectorAll('.template-card').forEach((card, index) => {
+    card.classList.toggle('selected', index === template.id - 1);
+  });
+  
+  // Show caption section
+  document.getElementById('captionSection').classList.add('active');
+  document.getElementById('previewImage').src = template.url;
+  
+  // Update preview
+  updatePreview();
+}
+
+// Update preview
+function updatePreview() {
+  const topText = document.getElementById('topTextInput').value;
+  const bottomText = document.getElementById('bottomTextInput').value;
+  
+  const topTextEl = document.getElementById('previewTopText');
+  const bottomTextEl = document.getElementById('previewBottomText');
+  
+  topTextEl.textContent = topText;
+  bottomTextEl.textContent = bottomText;
+  
+  topTextEl.style.display = topText ? 'block' : 'none';
+  bottomTextEl.style.display = bottomText ? 'block' : 'none';
+}
+
+// Open create modal
+function openCreateModal() {
+  editingMemeId = null;
+  selectedTemplate = null;
+  
+  document.getElementById('modalTitle').textContent = 'Create New Meme';
+  document.getElementById('topTextInput').value = '';
+  document.getElementById('bottomTextInput').value = '';
+  document.getElementById('captionSection').classList.remove('active');
+  
+  initTemplates();
+  
+  document.getElementById('memeModal').classList.add('active');
+}
+
+// Open edit modal
+function openEditModal(memeId) {
+  const meme = memes.find(m => m.id === memeId);
+  if (!meme) return;
+  
+  editingMemeId = memeId;
+  selectedTemplate = memeTemplates.find(t => t.id === meme.templateId);
+  
+  document.getElementById('modalTitle').textContent = 'Edit Meme';
+  document.getElementById('topTextInput').value = meme.topText;
+  document.getElementById('bottomTextInput').value = meme.bottomText;
+  
+  initTemplates();
+  selectTemplate(selectedTemplate);
+  
+  document.getElementById('memeModal').classList.add('active');
+}
+
+// Close modal
+function closeModal() {
+  document.getElementById('memeModal').classList.remove('active');
+}
+
+// Save meme
+function saveMeme() {
+  const topText = document.getElementById('topTextInput').value.trim();
+  const bottomText = document.getElementById('bottomTextInput').value.trim();
+  
+  if (!selectedTemplate || !topText || !bottomText) {
+    alert('Please select a template and enter both captions!');
+    return;
+  }
+  
+  if (editingMemeId) {
+    // Update existing meme
+    const index = memes.findIndex(m => m.id === editingMemeId);
+    if (index !== -1) {
+      memes[index].topText = topText;
+      memes[index].bottomText = bottomText;
+    }
+  } else {
+    // Create new meme
+    const newMeme = {
+      id: Date.now(),
+      templateId: selectedTemplate.id,
+      templateName: selectedTemplate.name,
+      templateUrl: selectedTemplate.url,
+      topText: topText,
+      bottomText: bottomText,
+      createdAt: new Date().toLocaleString()
+    };
+    memes.push(newMeme);
+  }
+  
+  renderMemes();
+  closeModal();
+}
+
+// Delete meme
+function deleteMeme(memeId) {
+  if (confirm('Are you sure you want to delete this meme?')) {
+    memes = memes.filter(m => m.id !== memeId);
+    renderMemes();
+  }
+}
+
+// Render memes
+function renderMemes() {
+  const container = document.getElementById('memesContainer');
+  
+  if (memes.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <p>No memes yet! 😢</p>
+        <p style="font-size: 16px; color: #666;">Click "Create New Meme" to get started!</p>
+      </div>
+    `;
+    return;
+  }
+  
+  container.innerHTML = '<div class="memes-grid"></div>';
+  const grid = container.querySelector('.memes-grid');
+  
+  memes.forEach(meme => {
+    const card = document.createElement('div');
+    card.className = 'meme-card';
+    card.innerHTML = `
+      <div class="meme-image-container">
+        <img src="${meme.templateUrl}" alt="${meme.templateName}" class="meme-image">
+        <div class="meme-text meme-text-top">${meme.topText}</div>
+        <div class="meme-text meme-text-bottom">${meme.bottomText}</div>
+      </div>
+      <div class="meme-info">
+        <div class="meme-template-name">Template: ${meme.templateName}</div>
+        <div class="meme-date">Created: ${meme.createdAt}</div>
+        <div class="meme-actions">
+          <button class="edit-btn" onclick="openEditModal(${meme.id})">✏️ Edit</button>
+          <button class="delete-btn" onclick="deleteMeme(${meme.id})">🗑️ Delete</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// Event listeners for live preview
+document.getElementById('topTextInput').addEventListener('input', updatePreview);
+document.getElementById('bottomTextInput').addEventListener('input', updatePreview);
+
+// Initialize
+initTemplates();
+</script>
+
+</body>
+</html>

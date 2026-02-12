@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qn01(c)</title>
+    <style>
+        .page-container{
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .header{
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px double gray;
+            margin: 2px;
+            background-color: antiquewhite;
+        }
+        .navbar{
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dotted gray;
+            margin: 2px;
+            background-color: rgb(153, 252, 252)
+        }
+        .content{
+            flex: 1;
+            width: 100%;
+            border: 2px dotted gray;
+            margin: 2px;
+            background-color: rgb(185, 170, 132);
+        }
+        .footer{
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dotted gray;
+            margin: 2px;
+            background-color: rgb(158, 194, 196);
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <header class="header">
+            <h1>Header</h1>
+        </header>
+        <div class="container">
+            <div class="navbar">
+                <p>Navigation bar</p>
+            </div>
+            <div class="content">
+                <h3>main Content</h3>
+            </div>
+        </div>
+        <footer class="footer">
+            <h5>Footer</h5>
+        </footer>
+    </div>
+</body>
+</html>
