@@ -1,3 +1,5 @@
+package EmployeeMgmt;
+
 // Employee Management System	---  This console application used to manage employee records in an organization.
 // It allows the user (admin) to store, view, update, and delete employee details in a simple and structured way.
 

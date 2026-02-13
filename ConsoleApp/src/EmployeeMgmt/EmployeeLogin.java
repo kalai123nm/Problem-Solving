@@ -1,3 +1,5 @@
+package EmployeeMgmt;
+
 import java.util.Scanner;
 
 public class EmployeeLogin {
